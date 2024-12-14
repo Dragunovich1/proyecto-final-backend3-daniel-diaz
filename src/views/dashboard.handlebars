@@ -1,0 +1,18 @@
+<!-- /views/dashboard.handlebars -->
+
+<header>
+  <h1>Bienvenido, {{user.first_name}} {{user.last_name}}</h1>
+  <nav>
+    {{#if (eq user.role 'admin')}}
+      <a href="/dashboard/products">Productos</a>
+    {{/if}}
+    <a href="/dashboard/carts">Carritos</a>
+    <a href="/auth/logout">Cerrar Sesión</a>
+  </nav>
+</header>
+
+<section id="dashboard-content">
+  {{{body}}}
+</section>
+
+<script src="/js/dashboard.js"></script>

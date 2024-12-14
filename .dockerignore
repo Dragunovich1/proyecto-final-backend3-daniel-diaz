@@ -1,0 +1,4 @@
+# Ignorar node_modules local y el archivo package-lock.json
+node_modules
+package-lock.json
+.DS_Store

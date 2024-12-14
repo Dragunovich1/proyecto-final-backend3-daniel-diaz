@@ -1,0 +1,100 @@
+<!-- /views/dashboardCarts.handlebars -->
+
+{{> header}}
+
+<div class="container">
+  <div class="cart-management">
+    <h2>Mi Carrito</h2>
+
+    <!-- Contenedor de alertas -->
+    <div id="alert-container" class="alert-container"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody id="cart-products">
+        {{#each cart.products}}
+        <tr>
+          <td>{{this.product.title}}</td>
+          <td>{{this.quantity}}</td>
+          <td>${{this.product.price}}</td>
+          <td>${{multiply this.quantity this.product.price}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+    <button id="complete-purchase-btn">Finalizar Compra</button>
+    <button id="empty-cart-btn" class="btn-warning">Vaciar Carrito</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Función para mostrar alertas de CSS
+    function showAlert(message, type) {
+      const alertContainer = document.getElementById('alert-container');
+      const alertElement = document.createElement('div');
+
+      alertElement.className = `alert alert-${type}`;
+      alertElement.innerText = message;
+
+      alertContainer.appendChild(alertElement);
+
+      setTimeout(() => {
+        alertElement.remove();
+      }, 5000);
+    }
+
+    // Lógica para finalizar la compra
+    document.getElementById('complete-purchase-btn').addEventListener('click', () => {
+      fetch(`/api/carts/{{cart._id}}/purchase`, {
+        method: 'POST',
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message === 'Compra completada') {
+            showAlert('Compra completada con éxito', 'success');
+            if (data.failedProducts && data.failedProducts.length > 0) {
+              showAlert('Algunos productos no pudieron ser comprados debido a falta de stock.', 'warning');
+            }
+            setTimeout(() => {
+              window.location.reload();
+            }, 5000);
+          } else {
+            showAlert('Error al completar la compra', 'error');
+          }
+        })
+        .catch((error) => {
+          console.error('Error en la solicitud:', error);
+          showAlert('Error al intentar completar la compra', 'error');
+        });
+    });
+
+    // Lógica para vaciar el carrito
+    document.getElementById('empty-cart-btn').addEventListener('click', () => {
+      fetch(`/api/carts/{{cart._id}}/empty`, {
+        method: 'POST',
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message === 'Carrito vaciado correctamente') {
+            showAlert('Carrito vaciado exitosamente', 'success');
+            document.getElementById('cart-products').innerHTML = '';  // Vaciar la tabla de productos
+          } else {
+            showAlert('Error al vaciar el carrito', 'error');
+          }
+        })
+        .catch((error) => {
+          console.error('Error en la solicitud:', error);
+          showAlert('Error al intentar vaciar el carrito', 'error');
+        });
+    });
+  });
+</script>

@@ -1,0 +1,14 @@
+<!-- /views/partials/header.handlebars -->
+
+<header>
+  <div class="container">
+    <h1>Bienvenido, {{user.first_name}} {{user.last_name}}</h1>
+    <nav>
+      {{#if (eq user.role 'admin')}}
+        <a href="/dashboard/products">Productos</a>
+      {{/if}}
+      <a href="/dashboard/carts">Carritos</a>
+      <a href="/auth/logout">Cerrar Sesión</a>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mi-app
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongo:27017/mydatabase
+    depends_on:
+      - mongo
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: test-container
+    environment:
+      - NODE_ENV=test
+      - APP_HOST=http://app:8080
+      - MONGODB_URI=mongodb://mongo:27017/testdatabase
+    depends_on:
+      - mongo
+    command: ["npx", "mocha", "src/tests/**/*.test.js"]
+    volumes:
+      - .:/usr/src/app
+
+volumes:
+  mongo-data:
