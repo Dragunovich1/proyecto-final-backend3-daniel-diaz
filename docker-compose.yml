@@ -1,41 +1,30 @@
-version: '3'
+version: "3.9"
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/adoption
+      - MONGO_URI_TEST=mongodb://mongo:27017/adoption_test
+      - JWT_SECRET=clave_secreta_proyecto_backend
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mongo
+
   mongo:
-    image: mongo
+    image: mongo:5.0
     container_name: mongo
     ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: mi-app
-    ports:
-      - "8080:8080"
-    environment:
-      - NODE_ENV=production
-      - MONGODB_URI=mongodb://mongo:27017/mydatabase
-    depends_on:
-      - mongo
-
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: test-container
-    environment:
-      - NODE_ENV=test
-      - APP_HOST=http://app:8080
-      - MONGODB_URI=mongodb://mongo:27017/testdatabase
-    depends_on:
-      - mongo
-    command: ["npx", "mocha", "src/tests/**/*.test.js"]
-    volumes:
-      - .:/usr/src/app
 
 volumes:
   mongo-data:

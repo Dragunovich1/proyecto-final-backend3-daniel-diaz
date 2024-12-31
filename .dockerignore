@@ -1,4 +1,19 @@
-# Ignorar node_modules local y el archivo package-lock.json
+# Ignorar dependencias locales
 node_modules
 package-lock.json
+
+# Ignorar archivos temporales del sistema
 .DS_Store
+Thumbs.db
+
+# Ignorar carpetas de logs y builds locales
+logs
+*.log
+tmp
+
+# Ignorar archivos de configuración específicos
+.env
+.env.test
+
+# Ignorar cualquier cosa no relacionada al código fuente
+uploads

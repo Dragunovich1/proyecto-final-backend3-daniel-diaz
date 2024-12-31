@@ -1,37 +1,48 @@
 {
-  "name": "my-ecommerce-app",
+  "name": "adoption-project",
   "version": "1.0.0",
-  "description": "E-commerce app backend with MongoDB and Express",
-  "main": "src/app.js",
-  "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "test": "cross-env NODE_ENV=test mocha src/tests/**/*.test.js"
+  "description": "",
+  "main": "loggerTest.js",
+  "directories": {
+    "test": "test"
   },
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "cross-env NODE_ENV=test mocha --file test/setup.js test/**/*.test.js",
+    "lint": "eslint .",
+    "swagger": "node swagger.json"
+  },
+  "keywords": [],
+  "author": "Daniel Diaz",
+  "license": "ISC",
+  "type": "commonjs",
   "dependencies": {
-    "@faker-js/faker": "^9.2.0",
-    "bcrypt": "^5.1.0",
-    "connect-mongo": "^5.0.0",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "express-handlebars": "^7.0.7",
-    "express-session": "^1.17.3",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1",
     "faker": "^5.5.3",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.3.4",
-    "passport": "^0.6.0",
-    "passport-jwt": "^4.0.1",
-    "passport-local": "^1.0.0",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1",
-    "uuid": "^9.0.0"
+    "handlebars": "^4.7.8",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "moment-timezone": "^0.5.46",
+    "mongoose": "^8.9.2",
+    "multer": "^1.4.5-lts.1",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
+    "chai": "^5.1.2",
     "cross-env": "^7.0.3",
-    "mocha": "^10.8.2",
-    "nodemon": "^3.1.7",
-    "supertest": "^7.0.0"
-  },
-  "author": "Daniel Diaz",
-  "license": "ISC"
+    "eslint": "^9.17.0",
+    "jest": "^29.7.0",
+    "mocha": "^11.0.1",
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
 }

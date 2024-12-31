@@ -1,38 +1,26 @@
-// /middlewares/authMiddleware.js
+const jwt = require('jsonwebtoken');
 
-const passport = require('passport');
+// Middleware para autenticar JWT desde cookies
+const authenticateJWT = (req, res, next) => {
+  const token = req.cookies?.jwt; // Obtener el token de las cookies
 
-// Middleware para autenticación con JWT
-const authJWTMiddleware = (roles = []) => {
-  if (typeof roles === 'string') {
-    roles = [roles];
+  if (!token) {
+    return res.status(401).json({ error: 'Token no proporcionado o no válido' });
   }
 
-  return [
-    passport.authenticate('jwt', { session: false }),
-    (req, res, next) => {
-      if (roles.length && !roles.includes(req.user.role)) {
-        return res.status(403).json({ message: 'Acceso no autorizado' });
-      }
-      next();
-    },
-  ];
-};
-
-// Middleware para autenticación basada en sesiones
-const authSessionMiddleware = (roles = []) => {
-  return (req, res, next) => {
-    if (!req.session || !req.session.user) {
-      return res.redirect('/auth/login'); // Redirigir si no hay sesión activa
-    }
-
-    // Si se pasan roles, verificar que el usuario tenga uno de los roles autorizados
-    if (roles.length && !roles.includes(req.session.user.role)) {
-      return res.status(403).json({ message: 'Acceso no autorizado' });
-    }
-
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // Decodificar el token y guardar la información del usuario en `req.user`
     next();
-  };
+  } catch (error) {
+    console.error('[ERROR] Token inválido:', error.message);
+    return res.status(401).json({ error: 'Token no válido' });
+  }
 };
 
-module.exports = { authJWTMiddleware, authSessionMiddleware };
+// Función para generar JWT
+const generateJWT = (user) => {
+  return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1d' });
+};
+
+module.exports = { authenticateJWT, generateJWT };

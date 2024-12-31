@@ -1,0 +1,49 @@
+Estructura de Proyecto:
+
+    Adoption Project/
+    ├── src/
+    │   ├── config/                         # Configuración general
+    │   │   ├── db.js                       # Configuración de MongoDB
+    │   │   ├── logger.js                   # Configuración de Winston Logger
+    │   │   └── swaggerConfig.js            # Configuración de Swagger
+    │   ├── controllers/                    # Controladores
+    │   │   ├── userController.js           # Lógica de rutas de usuarios
+    │   │   ├── petController.js            # Lógica de rutas de mascotas
+    │   │   ├── adoptionController.js       # Lógica de rutas de adopciones
+    │   │   └── sessionController.js        # Lógica de rutas de sesion    
+    │   ├── middlewares/                    # Middlewares
+    │   │   ├── authMiddleware.js           # Middleware de autenticación
+    │   │   ├── errorHandler.js             # Manejo de errores
+    │   │   ├── validateMiddleware.js       # Validación global de datos    
+    │   │   ├── validatePetMiddleware.js    # Validación de datos de mascotas
+    │   │   ├── validateUserMiddleware.js   # Validación de datos de usuario
+    │   │   └── multerMiddleware.js         # Middleware para manejo de archivos
+    │   ├── models/                         # Modelos de la base de datos
+    │   │   ├── User.js                     # Modelo de usuario
+    │   │   ├── Pet.js                      # Modelo de mascota
+    │   │   └── Adoption.js                 # Modelo de adopción
+    │   ├── routes/                         # Rutas
+    │   │   ├── userRoutes.js               # Rutas de usuarios
+    │   │   ├── petRoutes.js                # Rutas de mascotas
+    │   │   ├── adoptionRoutes.js           # Rutas de adopciones
+    │   │   ├── mockRoutes.js               # Rutas de mocking  
+    │   │   └── sessionRoutes.js            # Rutas de sesiones
+    │   ├── uploads/                        # carpeta de subida de archivos
+    │   │   ├── documents                   # carpeta de documentos de users
+    │   │   ├── pets                        # carpeta de imagenes de mascotas    
+    │   ├── utils/                          # Utilidades generales
+    │   │   ├── mockData.js                 # Generación de datos falsos (Mocking)
+    │   ├── views/                          # Vistas con Handlebars
+    │   │   ├── index.hbs                   # Vista principal
+    │   │   ├── users.hbs                   # Vista de usuarios
+    │   │   └── pets.hbs                    # Vista de mascotas
+    │   └── app.js                          # Configuración principal del servidor
+    ├── test/                               # Pruebas
+    │   ├── user.test.js                    # Pruebas para usuarios
+    │   ├── pet.test.js                     # Pruebas para mascotas
+    │   └── adoption.test.js                # Pruebas para adopciones
+    ├── .env                                # Variables de entorno
+    ├── .env.test                           # Variables de entorno para ambiente test
+    ├── dockerfile                          # Contenerización
+    ├── README.md                           # Documentación del proyecto
+    └── package.json                        # Dependencias y scripts
