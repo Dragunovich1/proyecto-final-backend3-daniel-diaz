@@ -95,7 +95,7 @@ Este proyecto incluye un `Dockerfile` para contenedores. Puedes construir y ejec
 
 ### Utilizar el comando:
 ```bash
-docker run -p 8080:8080 \ -e NODE_ENV=production \ -e MONGO_URI_DOCKER=mongodb://mongo:27017/adoption \ -e JWT_SECRET=clave_secreta_proyecto_backend \ dragunovich1/proyecto-final-backend3-coderhouse
+docker run -p 8080:8080 -e NODE_ENV=development -e MONGO_URI="mongodb://host.docker.internal:27017/adoption" dragunovich1/proyecto-final-backend3-coderhouse
 ```
 
 ---
