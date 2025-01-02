@@ -14,6 +14,16 @@ Este proyecto es un servidor básico de adopciones, desarrollado con Node.js y E
 
 ---
 
+## Links
+
+DockerHub: https://hub.docker.com/repository/docker/dragunovich1/proyecto-final-backend3-coderhouse/general
+
+Git Hub: https://github.com/Dragunovich1/proyecto-final-backend3-daniel-diaz
+
+Railway: https://proyecto-final-backend3-daniel-diaz.railway.app
+
+---
+
 ## Instalación y Configuración
 
 ### Clonar el Repositorio
@@ -83,32 +93,16 @@ npm test
 
 Este proyecto incluye un `Dockerfile` para contenedores. Puedes construir y ejecutar la imagen Docker de la siguiente manera:
 
-### Construir la Imagen
+### Utilizar el comando:
 ```bash
-docker build -t danieldiaz/adoption-server:latest .
-```
-
-### Ejecutar el Contenedor
-```bash
-docker run -p 8080:8080 -e MONGO_URL=<tu_mongo_url> -e JWT_SECRET=<clave_secreta> danieldiaz/adoption-server:latest
+docker run -p 8080:8080 \ -e NODE_ENV=production \ -e MONGO_URI_DOCKER=mongodb://mongo:27017/adoption \ -e JWT_SECRET=clave_secreta_proyecto_backend \ dragunovich1/proyecto-final-backend3-coderhouse
 ```
 
 ---
 
-## Despliegue en Railway
-
-Este proyecto está desplegado en Railway. Puedes acceder a la aplicación en:
-[https://adoption-server.railway.app](https://proyecto-final-backend3-daniel-diaz.railway.app)
 
 ### Variables de Entorno en Railway
 Configura las mismas variables de entorno descritas anteriormente en el panel de control de Railway.
-
----
-
-## Recursos Adicionales
-
-- **Repositorio GitHub:** [https://github.com/DanielDiaz/AdoptionServer](https://github.com/DanielDiaz/AdoptionServer)
-- **DockerHub:** [https://hub.docker.com/repository/docker/danieldiaz/adoption-server](https://hub.docker.com/repository/docker/danieldiaz/adoption-server)
 
 ---
 

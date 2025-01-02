@@ -2,16 +2,13 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    // Detectar si estamos en Docker o localhost
-    const isDocker = process.env.NODE_ENV === 'development' && process.env.MONGO_URI.includes('mongo');
+    // Si estamos en test, usar MONGO_URI_TEST; si no, usar MONGO_URI o localhost como fallback
     const uri = process.env.NODE_ENV === 'test'
       ? process.env.MONGO_URI_TEST
-      : isDocker
-      ? process.env.MONGO_URI
-      : 'mongodb://localhost:27017/adoption'; // Default para localhost
+      : (process.env.MONGO_URI || 'mongodb://localhost:27017/adoption');
 
     console.log(`Conectando a la base de datos: ${uri}`);
-    await mongoose.connect(uri); // Sin opciones adicionales
+    await mongoose.connect(uri);
     console.log('Conexión exitosa a MongoDB');
   } catch (error) {
     console.error('Error conectando a MongoDB:', error.message);
