@@ -20,7 +20,7 @@ DockerHub: https://hub.docker.com/repository/docker/dragunovich1/proyecto-final-
 
 Git Hub: https://github.com/Dragunovich1/proyecto-final-backend3-daniel-diaz
 
-Railway: https://proyecto-final-backend3-daniel-diaz.railway.app
+Railway: https://proyecto-final-backend3-daniel-d-production.up.railway.app
 
 ---
 
