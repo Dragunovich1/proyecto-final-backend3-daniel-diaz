@@ -40,7 +40,7 @@ npm install
 ### Configurar Variables de Entorno
 Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
 ```
-MONGO_URL=mongodb+srv://<usuario>:<contraseña>@cluster.mongodb.net/adoption
+MONGO_URI=mongodb+srv://dragunovich:coder12345@adoption.uc609.mongodb.net/?retryWrites=true&w=majority
 JWT_SECRET=claveSecretaParaJWT
 PORT=8080
 NODE_ENV=development
@@ -85,7 +85,7 @@ npm test
    ```
    MONGO_URL=mongodb+srv://<usuario>:<contraseña>@cluster.mongodb.net/adoption_test
    ```
-2. Asegúrate de que la base de datos de pruebas esté accesible.
+2. Asegurarse de que la base de datos de pruebas esté accesible.
 
 ---
 
